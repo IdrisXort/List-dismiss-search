@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person';
+import './index.css';
+import './bootstrap.min.css';
 
 let name='ido';
 const list = 
@@ -27,32 +29,38 @@ const list =
 {"id":20,"first_name":"Nichole","last_name":"Tomalin","gender":"Female","email":"ntomalinj@blogspot.com"}];
 class App extends React.Component {
   constructor(props){
+
     super(props);
+    this.firstName = React.createRef();
+    this.lastname = React.createRef();
+    this.mail = React.createRef();
+    this.idInput = React.createRef();
     this.state={
       value:null,
       people:[]
 
     }
-  }
-  myFunction(){
-    var input, filter;var arr=[];
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();    
-    for (var i = 0; i < list.length; i++) {    
-       var a = list[i];
-       if(a.first_name.toUpperCase().includes(filter)){
-         
-             arr.push(a)    
-         
-        }
-        this.setState({people:arr})
+  }  
 
-    }
-  
 
-}
 componentDidMount(){
         this.setState({people:list})
+    }
+
+    mijnFilter(){
+      console.log(this.firstName.current.value, this.lastname.current.value, this.mail.current.value);
+      const firstNameFilter = this.firstName.current.value.toUpperCase();
+      const lastNameFilter = this.lastname.current.value.toUpperCase();
+      const mailFilter = this.mail.current.value.toUpperCase();
+      const idFilter =  this.idInput.current.value;
+
+
+      const newList = list.filter(item => (item.first_name.toUpperCase().includes(firstNameFilter)))
+        .filter(item => (item.last_name.toUpperCase().includes(lastNameFilter)))
+        .filter(item => (item.email.toUpperCase().includes(mailFilter)))
+        .filter(item => (item.id.toString().includes(idFilter)));
+      
+      this.setState({people:newList});
     }
 
   render() {
@@ -62,25 +70,41 @@ componentDidMount(){
                 <img src={logo} className="App-logo" alt="logo" />
                 <h1 className="App-title">Hello {name} Welcome to React</h1>
                 </header>
-                <input type="text" id="myInput" onChange={this.myFunction.bind(this)} placeholder="Search for names.." title="Type in a name"></input>
-             
-                {this.state.people.map((person,index)=>{
-                        return  ( 
-                            <div>
-                                        <Person 
-                                        key={index}
-                                            id={person.id}
-                                            name={person.first_name}
-                                            sname={person.last_name}
-                                            mail={person.email}
-                                        />
-                            </div>
-                                )
-                    })
+               <div className="row">
                                 
+                                <div className='col-md-1'>  <input type="text" ref={this.idInput} id="myInputName" onChange={this.mijnFilter.bind(this)} placeholder="Search for names.." title="Type in a name"></input> </div>
+                                <div className='col-md-3'>  <input type="text" ref={this.firstName} id="myInputName" onChange={this.mijnFilter.bind(this)} placeholder="Search for names.." title="Type in a name"></input> </div>
+                                <div className='col-md-3'>  <input type="text" ref={this.lastname}  look='last_name' id="myInputLastName" onChange={this.mijnFilter.bind(this)} placeholder="Search for lastname.." title="Type in a name"></input> </div>
+                                <div className='col-md-3'>  <input type="text" ref={this.mail}   look='email' id="myInputMail" onChange={this.mijnFilter.bind(this)} placeholder="Search for mail.." title="Type in a name"></input> </div>
+            </div>
+                <div className="row">
+                                <div className='col-md-1'> Id </div>
+                                <div className='col-md-3'> Name </div>
+                                <div className='col-md-3'> Last Name </div>
+                                <div className='col-md-3'> E-mail </div>
+                                <div className='col-md-2'>  </div>
+                               
+                        </div> 
+{this.state.people.map((person,index)=>{
+                        return  (                            
+                        <div> 
+                              <ul className="list-group">
+                                                  <Person 
+                                                      key={index}
+                                                      id={person.id}
+                                                      name={person.first_name}
+                                                      sname={person.last_name}
+                                                      mail={person.email}
+                                                  />
+                              
+
+                                </ul>
+                          </div>            
+                                )
+                    })                              
                             
                 }
-       
+     
 
         
       </div>

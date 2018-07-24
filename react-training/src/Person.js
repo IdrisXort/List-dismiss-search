@@ -2,12 +2,10 @@ import React from 'react';
 
 
 class Person extends React.Component{
-   constructor(props){
-       super(props)
+   constructor(){
+       super()
        this.state={
-           ishidden:false,
-           
-           
+           ishidden:false
        }
    }
    Dismiss(){
@@ -15,19 +13,29 @@ class Person extends React.Component{
    }
    render(){
    return(
+       
        <div>
-            
-                            <div className="divTable">
-                                <div className="divTableBody">
-                                    {!this.state.ishidden && <div className="divTableRow">
-                                        <div className="divTableCell">{this.props.id}  {this.props.name}  {this.props.sname} {this.props.mail} <button onClick={this.Dismiss.bind(this)}>Dismiss </button></div>                                       
-                                         <div className="divTableCell"></div>                                   
-                                    </div>} 
-                                </div>
-                            </div>
-         </div>
-           
-        
+          
+                     
+                  
+             {!this.state.ishidden &&
+                <ul className="list-group">
+                         <li className="list-group-item">
+                            
+                                <div className="row">
+                                        <div className='col-md-1' > {this.props.id} </div>
+                                        <div className='col-md-3'> {this.props.name} </div>
+                                        <div className='col-md-3'> {this.props.sname} </div>
+                                        <div className='col-md-3'> {this.props.mail} </div>
+                                        <div className='col-md-2'> <button onClick={this.Dismiss.bind(this)}>Dismiss </button> </div>
+
+                                </div>      
+                          </li>
+                          </ul>
+                         }                  
+          
+                  
+       </div>
      )}
 }
 
