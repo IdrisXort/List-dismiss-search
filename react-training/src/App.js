@@ -78,10 +78,10 @@ componentDidMount(){
                                 <div className='col-md-3'>  <input type="text" ref={this.mail}   look='email' id="myInputMail" onChange={this.mijnFilter.bind(this)} placeholder="Search for mail.." title="Type in a name"></input> </div>
             </div>
                 <div className="row">
-                                <div className='col-md-1'> Id </div>
-                                <div className='col-md-3'> Name </div>
-                                <div className='col-md-3'> Last Name </div>
-                                <div className='col-md-3'> E-mail </div>
+                                <div className='col-md-1'> Id :</div>
+                                <div className='col-md-3'> Name :</div>
+                                <div className='col-md-3'> Last Name :</div>
+                                <div className='col-md-3'> E-mail :</div>
                                 <div className='col-md-2'>  </div>
                                
                         </div> 
